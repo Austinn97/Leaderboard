@@ -4,31 +4,30 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
-        ClassLoader loader = ClassLoader.getSystemClassLoader();
-        StringBuffer csvContents = new StringBuffer();
-        try(BufferedReader reader = new BufferedReader(new InputStreamReader(loader.getResourceAsStream("grades.csv")))) {
-            String line;
-            while((line = reader.readLine()) != null) {
-                csvContents.append(line + '\n');
+        ClassLoader csvStudentLoader = ClassLoader.getSystemClassLoader();
+        StringBuffer csvStudentContents = new StringBuffer();
+		ClassLoader csvCourseLoader = ClassLoader.getSystemClassLoader();
+		StringBuffer csvCourseContents = new StringBuffer();
+		
+        try(BufferedReader csvStudentReader = new BufferedReader(new InputStreamReader(csvStudentLoader.getResourceAsStream("students.csv")))) {
+            String studentLine;
+            while((studentLine = csvStudentReader.readLine()) != null) {
+                csvStudentContents.append(studentLine + '\n');
             }
         }
-        catch(IOException e) { e.printStackTrace(); }
-        String testCsv = csvContents.toString();
-        
-        StringBuffer jsonContents = new StringBuffer();
-        try(BufferedReader reader = new BufferedReader(new InputStreamReader(loader.getResourceAsStream("grades.json")))) {
-            String line;
-            while((line = reader.readLine()) != null) {
-                jsonContents.append(line + '\n');
-            }
-        }
-        catch(IOException e) { e.printStackTrace(); }
-        String testJson = jsonContents.toString();
-
-        String json = Converter.csvToJson(testCsv);
-        System.out.println(json);
-        System.out.println("\n----------------\n");
-        String csv = Converter.jsonToCsv(testJson);
-        System.out.println(csv);
-    }
+       catch(IOException e){}
+	   try(BufferedReader csvCourseReader = new BufferedReader(new InputStreamReader(csvCourseLoader.getResourceAsStream("courses.csv")))){
+		   String courseLine;
+		   while((courseLine = csvCourseReader.readLine()) != null){
+			   csvCourseContents.append(courseLine + '\n');
+		   }
+	   
+	   
+	   }
+		catch(IOException e){}
+	   
+        System.out.println(csvStudentContents);	
+		System.out.println(csvCourseContents);	
+	}
+	
 }
