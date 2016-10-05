@@ -29,9 +29,8 @@ public class LeaderboardTest{
 	@Before
 	public void setUp(){
 		try{
-			csvStudentString = readFile("");// put in student path
-			csvCourseString =  readFile("");// put in course path
-			// balls austin you suck 
+			csvStudentString = readFile("src/test/resources/students.csv");
+			csvCourseString =  readFile("src/test/resources/courses.csv");
 		}
 		catch(IOException e){}
 	}
