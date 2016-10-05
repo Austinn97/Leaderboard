@@ -3,7 +3,6 @@ buildscript {
         classpath files(mkdir('build/classes/main'))
         classpath files(mkdir('build/resources/main'))
         classpath 'net.sf.opencsv:opencsv:2.3'
-        classpath 'com.googlecode.json-simple:json-simple:1.1.1'
     }
 }
 plugins {
@@ -15,7 +14,7 @@ apply plugin: 'jacoco'
 version = '1.0'
 jar {
     manifest {
-        attributes 'Implementation-Title': 'CSV JSON', 
+        attributes 'Implementation-Title': 'Leaderboard', 
                    'Implementation-Version': version, 
                    'Main-Class': 'edu.jsu.mcis.Main'
     }
@@ -40,9 +39,7 @@ repositories {
 
 dependencies {
     compile 'net.sf.opencsv:opencsv:2.3'
-    compile 'com.googlecode.json-simple:json-simple:1.1.1'
     testCompile 'junit:junit:4.+'
-    testCompile 'com.googlecode.json-simple:json-simple:1.1.1'
 }
 
 jacocoTestReport {
