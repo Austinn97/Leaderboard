@@ -1,4 +1,4 @@
-edu.jsu.mcis; 
+package edu.jsu.mcis; 
 
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -9,7 +9,7 @@ import java.util.*;
 public class LeaderboardTest{
 	private String csvStudentString;
 	private String csvCourseString; 
-	private Gamegogy yes; 
+	private Leaderboards board; 
 
 	private static String readFile(String string) throws IOException{
 		File files = new File(string);
@@ -28,6 +28,7 @@ public class LeaderboardTest{
 
 	@Before
 	public void setUp(){
+		board = new Leaderboards();
 		try{
 			csvStudentString = readFile("src/test/resources/students.csv");
 			csvCourseString =  readFile("src/test/resources/courses.csv");
@@ -36,12 +37,17 @@ public class LeaderboardTest{
 	}
 
 	@Test
-	public void testReadsInStudentFile{
-		assertEquals(false); 
+	public void testReadsInStudentFile(){
+		assertEquals(board.readStudentFile(), csvStudentString); 
 	}
 
 	@Test
-	public void testReadsInCourseFile{
-		assertEquals(false); 
+	public void testReadsInCourseFile(){
+		assertEquals(board.readCourseFile(), csvCourseString); 
+	}
+
+	@Test
+	public void testStudentIDGivesStudentInfo(){
+		assertEquals(board.getUserInput(student 111128), "[111128] Maritza Abbott mabbott@jsu.edu")
 	}
 }
