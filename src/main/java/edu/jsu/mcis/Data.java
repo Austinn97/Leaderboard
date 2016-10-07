@@ -1,30 +1,30 @@
 package edu.jsu.mcis;
+
+
+
+
 import java.io.*;
 import java.util.*;
+import com.opencsv.CSVReader;
+
+
 
 public class Data{
-	private String line; 
+	
 	private String studentFile;
 
 
 	public String readFile(String string) throws IOException{
 		studentFile = "src/test/resources/students.csv";
-		File files = new File(string);
-		File studentFiles = new File(studentFile);
-		Scanner scanner = new Scanner(studentFiles); 
-		String lineSeparator = System.getProperty("line.separator");
-		try{
-			while(scanner.hasNextLine()){
-				line = line + scanner.nextLine() + lineSeparator;
-				studentFile = line; 
+		CSVReader reader = new CSVReader(new FileReader("src/test/resources/students.csv"));
+		String [] nextLine;
+		while ((nextLine = reader.readNext()) != null) {
+        // nextLine[] is an array of values from the line
+			for(int i = 0; i < reader.length(); i++){
+				System.out.println(nextLine[i]);
 			}
-			return line;
-		}
-		finally{
-			scanner.close();
 		}
 	}
-
 	/*public static StringBuffer dataRead(){
 		ClassLoader csvStudentLoader = ClassLoader.getSystemClassLoader();
         StringBuffer csvStudentContents = new StringBuffer();

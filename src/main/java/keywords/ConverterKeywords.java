@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 /*package keywords;
 
 import edu.jsu.mcis.*;
