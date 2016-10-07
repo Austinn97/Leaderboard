@@ -14,6 +14,12 @@ public class Data{
 	private String studentFile;
 
 
+	public String[] getStudentID(){
+		return null; 
+	}
+
+
+
 	public String readFile(String string) throws IOException{
 		studentFile = "src/test/resources/students.csv";
 		CSVReader reader = new CSVReader(new FileReader("src/test/resources/students.csv"));
@@ -23,7 +29,23 @@ public class Data{
 			for(int i = 0; i < reader.length(); i++){
 				System.out.println(nextLine[i]);
 			}
+		/*studentFile = "src/test/resources/students.csv";
+		File files = new File(string);
+		File studentFiles = new File(studentFile);
+		Scanner scanner = new Scanner(studentFiles); 
+		String lineSeparator = System.getProperty("line.separator");
+		try{
+			while(scanner.hasNextLine()){
+				line = line + scanner.nextLine() + lineSeparator;
+				studentFile = line; 
+			}
+			return line;
 		}
+		finally{
+			scanner.close();
+		}*/
+		return "A";
+
 	}
 	/*public static StringBuffer dataRead(){
 		ClassLoader csvStudentLoader = ClassLoader.getSystemClassLoader();

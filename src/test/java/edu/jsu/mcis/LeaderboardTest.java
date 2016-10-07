@@ -25,17 +25,8 @@ public class LeaderboardTest{
 	}
 
 	@Test
-	public void testReadsInStudentFile(){
-		assertEquals(board.readFile(), csvStudentString); 
+	public void testReadsInStudentIDCorrectly(){
+		assertEquals("111111", board.getStudentID()); 
 	}
 
-	@Test
-	public void testReadsInCourseFile(){
-		assertEquals(board.readFile(), csvCourseString); 
-	}
-
-	/*@Test
-	public void testStudentIDGivesStudentInfo(){
-		//assertEquals(board.getUserInput(student 111128), "[111128] Maritza Abbott mabbott@jsu.edu");
-	}*/
 }
