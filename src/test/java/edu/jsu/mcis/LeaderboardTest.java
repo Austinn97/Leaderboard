@@ -8,46 +8,34 @@ import java.util.*;
 
 public class LeaderboardTest{
 	private String csvStudentString;
-	private String csvCourseString; 
-	private Leaderboards board; 
+	private String csvCourseString;
+	private String line;  
+	private Data board; 
 
-	private static String readFile(String string) throws IOException{
-		File files = new File(string);
-		Scanner scanner = new Scanner(files); 
-		String lineSeparator = System.getProperty("line.separator");
-		try{
-			while(scanner.hasNextLine()){
-				line = line + scanner.nextLine() + lineSeparator; 
-			}
-			return line;
-		}
-		finally{
-			scanner.close();
-		}
-	}
+	
 
 	@Before
 	public void setUp(){
-		board = new Leaderboards();
+		board = new Data();
 		try{
-			csvStudentString = readFile("src/test/resources/students.csv");
-			csvCourseString =  readFile("src/test/resources/courses.csv");
+			csvStudentString = board.readFile("src/test/resources/students.csv");
+			csvCourseString =  board.readFile("src/test/resources/courses.csv");
 		}
 		catch(IOException e){}
 	}
 
 	@Test
 	public void testReadsInStudentFile(){
-		assertEquals(board.readStudentFile(), csvStudentString); 
+		assertEquals(board.readFile(), csvStudentString); 
 	}
 
 	@Test
 	public void testReadsInCourseFile(){
-		assertEquals(board.readCourseFile(), csvCourseString); 
+		assertEquals(board.readFile(), csvCourseString); 
 	}
 
-	@Test
+	/*@Test
 	public void testStudentIDGivesStudentInfo(){
-		assertEquals(board.getUserInput(student 111128), "[111128] Maritza Abbott mabbott@jsu.edu")
-	}
+		//assertEquals(board.getUserInput(student 111128), "[111128] Maritza Abbott mabbott@jsu.edu");
+	}*/
 }
