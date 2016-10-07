@@ -7,8 +7,14 @@ public class Data{
 	private String studentFile;
 
 
+	public String[] getStudentID(){
+		return null; 
+	}
+
+
+
 	public String readFile(String string) throws IOException{
-		studentFile = "src/test/resources/students.csv";
+		/*studentFile = "src/test/resources/students.csv";
 		File files = new File(string);
 		File studentFiles = new File(studentFile);
 		Scanner scanner = new Scanner(studentFiles); 
@@ -22,7 +28,8 @@ public class Data{
 		}
 		finally{
 			scanner.close();
-		}
+		}*/
+		return "A";
 	}
 
 	/*public static StringBuffer dataRead(){
