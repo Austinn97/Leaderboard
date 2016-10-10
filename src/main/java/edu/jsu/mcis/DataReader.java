@@ -6,19 +6,18 @@ import java.io.*;
 
 
 public class DataReader{
-    List<Student> studentList = new ArrayList<Student>();
-    List<Course> courseList = new ArrayList<Course>();
+    int i, j, x, y = 0;
+    List[][] studentList = new ArrayList[i][j];
+    List[][] courseList = new ArrayList[x][y];
 
     public List readFile(String fileType) throws IOException {
         String file;
 
         if (fileType == "Student") {
             file = "src/main/resources/students.csv";
-            Student student = new Student();
             
             try (CSVReader reader = new CSVReader(new FileReader(file))) {
-                //List<String[]> rows = reader.readAll();
-                for (i = 0; i < rows.size(); i++) {
+                for (i = 0; i < reader.length(); i++) {
                     
                 }
                 /*Iterator stuIterator = studentList.iterator();
