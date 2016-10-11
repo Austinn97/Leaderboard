@@ -24,11 +24,6 @@ public class Student{
         email = "";
     }
     
-    @Override
-    public String toString() {
-        return "[" + getID() + "]" + getFirstName() + getLastName() + getEmail() + "@jsu.edu";
-    }
-    
 	public String getID(){
 		return this.id; 
 	}
@@ -60,4 +55,9 @@ public class Student{
 	public void setEmail(String email){
 		this.email = email; 
 	}
+    
+    @Override
+    public String toString() {
+        return "[" + getID() + "] " + getFirstName() + " " + getLastName() + " " + getEmail() + "@jsu.edu";
+    }
 }
