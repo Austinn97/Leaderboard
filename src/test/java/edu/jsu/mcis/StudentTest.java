@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.*; 
 
 public class StudentTest {
+	private Student student; 
 
     @Before
 	public void setUp(){

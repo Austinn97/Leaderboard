@@ -6,27 +6,29 @@ import java.io.*;
 
 
 public class DataReader{
-    int i, j, x, y = 0;
-    List[][] studentList = new ArrayList[i][j];
-    List[][] courseList = new ArrayList[x][y];
+    private int i, j, x, y = 0;
+    private List<Student> studentList = new ArrayList<Student>(); 
+    private List<Course> courseList = new ArrayList<Course>();
+    private Iterator<String[]> studentArray;
+    private Student student;
+    private Course course;
+    private DataReader reader; 
 
-    public List readFile(String fileType) throws IOException {
+    public List readFile(String fileType){ //might need IO exception
         String file;
 
         if (fileType == "Student") {
             file = "src/main/resources/students.csv";
             
             try (CSVReader reader = new CSVReader(new FileReader(file))) {
-                for (i = 0; i < reader.length(); i++) {
-                    
+                studentArray = reader.iterator();
+                Iterator<Student> studentIterator = studentList.iterator();
+                while (studentIterator.hasNext()) {
+                    student.setID() = studentIterator.next();
+                    student.setFirstName() = studentIterator.next();
+                    student.setLastName() = studentIterator.next();
+                    student.setEmail() = studentIterator.next();
                 }
-                /*Iterator stuIterator = studentList.iterator();
-                while (stuIterator.hasNext()) {
-                    student.setID = stuIterator.next();
-                    student.setFirstName = stuIterator.next();
-                    student.setLastName = stuIterator.next();
-                    student.setEmail = stuIterator.next();
-                }*/
                 return studentList;
             }
         }
@@ -34,15 +36,16 @@ public class DataReader{
             file = "src/main/resources/courses.csv";
             try (CSVReader reader = new CSVReader(new FileReader(file))) {
                 courseList = reader.readAll();
-                Iterator courseIterator = courseList.iterator();
+                Iterator<Course> courseIterator = courseList.iterator();
                 while (courseIterator.hasNext()) {
-                    course.setID = courseIterator.next();
-                    course.setTerm = courseIterator.next();
-                    course.setYear = courseIterator.next();
-                    course.setSize = courseIterator.next();
+                    course.setID() = courseIterator.next();
+                    course.setTerm() = courseIterator.next();
+                    course.setYear() = courseIterator.next();
+                    course.setSize() = courseIterator.next();
                 }
                 return courseList;
             }
         }
+        return null; 
     }
 }

@@ -8,7 +8,7 @@ public class Course{
 	private String classSize; 
 
 	public String getID(){
-		return this.id; 
+		return id; 
 	}
 
 	public void setID(String id){
@@ -16,7 +16,7 @@ public class Course{
 	}
 
 	public String getTerm(){
-		return this.term; 
+		return term; 
 	}
 
 	public void setTerm(String term){
@@ -24,7 +24,7 @@ public class Course{
 	}
 
 	public String getYear(){
-		return this.year; 
+		return year; 
 	}
 
 	public void setYear(String year){
@@ -32,7 +32,7 @@ public class Course{
 	}
 
 	public String getSize(){
-		return this.classSize; 
+		return classSize; 
 	}
 
 	public void setSize(String classSize){
@@ -41,6 +41,6 @@ public class Course{
     
     @Override
     public String toString() {
-        return "[" + getID() + "] " + getTerm() + " " + getYear() + " (" + getSize() + ") students";
+        return "[" + id + "] " + term + " " + year + " (" + classSize + " students)";
     }
 }

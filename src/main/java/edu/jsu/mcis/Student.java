@@ -25,7 +25,7 @@ public class Student{
     }
     
 	public String getID(){
-		return this.id; 
+		return id; 
 	}
 
 	public void setID(String id){
@@ -33,7 +33,7 @@ public class Student{
 	}
 
 	public String getFirstName(){
-		return this.firstName; 
+		return firstName; 
 	}
 
 	public void setFirstName(String firstName){
@@ -41,7 +41,7 @@ public class Student{
 	}
 
 	public String getLastName(){
-		return this.lastName; 
+		return lastName; 
 	}
 
 	public void setLastName(String lastName){
@@ -49,7 +49,7 @@ public class Student{
 	}
 
 	public String getEmail(){
-		return this.email; 
+		return email; 
 	}
 
 	public void setEmail(String email){
@@ -58,6 +58,6 @@ public class Student{
     
     @Override
     public String toString() {
-        return "[" + getID() + "] " + getFirstName() + " " + getLastName() + " " + getEmail() + "@jsu.edu";
+        return "[" + id + "] " + firstName + " " + lastName + " " + email + "@jsu.edu";
     }
 }
