@@ -20,14 +20,17 @@ public class DataReader{
         if (fileType == "Student") {
             file = "src/main/resources/students.csv";
             
-            try (CSVReader reader = new CSVReader(new FileReader(file))) {
-                studentArray = reader.iterator();
+            try (CSVReader reader = new CSVReader(new FileReader(file))){
+                CSVIterator iterator = new CSVIterator(reader);
+                studentArray = iterator;
+                
                 Iterator<Student> studentIterator = studentList.iterator();
                 while (studentIterator.hasNext()) {
-                    student.setID() = studentIterator.next();
-                    student.setFirstName() = studentIterator.next();
-                    student.setLastName() = studentIterator.next();
-                    student.setEmail() = studentIterator.next();
+                    student.setID(studentArray.next());
+                    student.setFirstName(studentArray.next());
+                    student.setLastName(studentArray.next());
+                    student.setEmail(studentArray.next());
+                    System.out.println("");
                 }
                 return studentList;
             }
