@@ -17,19 +17,12 @@ public class Student{
         email = "";
     }
     
-    public Student(String id) {
-        this.id = id;
-        firstName = "";
-        lastName = "";
-        email = "";
-    }
-    
 	public String getID(){
 		return id; 
 	}
 
 	public void setID(String id){
-		this.id = id; 
+		this.id = id.replace("\"", "");
 	}
 
 	public String getFirstName(){
@@ -37,7 +30,7 @@ public class Student{
 	}
 
 	public void setFirstName(String firstName){
-		this.firstName = firstName; 
+		this.firstName = firstName.replace("\"", ""); 
 	}
 
 	public String getLastName(){
@@ -45,7 +38,7 @@ public class Student{
 	}
 
 	public void setLastName(String lastName){
-		this.lastName = lastName; 
+		this.lastName = lastName.replace("\"", ""); 
 	}
 
 	public String getEmail(){
@@ -53,11 +46,11 @@ public class Student{
 	}
 
 	public void setEmail(String email){
-		this.email = email; 
+		this.email = email.replace("\"", ""); 
 	}
     
     @Override
     public String toString() {
-        return "[" + id + "] " + firstName + " " + lastName + " " + email + "@jsu.edu";
+        return "[" + id + "]" + " " + firstName + " " + lastName + " " + email + "@jsu.edu";
     }
 }

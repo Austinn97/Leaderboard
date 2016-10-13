@@ -12,7 +12,7 @@ public class Course{
 	}
 
 	public void setID(String id){
-		this.id = id; 
+		this.id = id.replace("\"", ""); 
 	}
 
 	public String getTerm(){
@@ -20,7 +20,7 @@ public class Course{
 	}
 
 	public void setTerm(String term){
-		this.term = term; 
+		this.term = term.replace("\"", ""); 
 	}
 
 	public String getYear(){
@@ -28,7 +28,7 @@ public class Course{
 	}
 
 	public void setYear(String year){
-		this.year = year; 
+		this.year = year.replace("\"", ""); 
 	}
 
 	public String getSize(){
@@ -36,7 +36,7 @@ public class Course{
 	}
 
 	public void setSize(String classSize){
-		this.classSize = classSize; 
+		this.classSize = classSize.replace("\"", ""); 
 	}
     
     @Override
