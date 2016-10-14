@@ -2,7 +2,7 @@ buildscript {
     dependencies {
         classpath files(mkdir('build/classes/main'))
         classpath files(mkdir('build/resources/main'))
-        classpath 'net.sf.opencsv:opencsv:2.3'
+        classpath 'com.opencsv:opencsv:3.8'
     }
 }
 plugins {
@@ -10,6 +10,8 @@ plugins {
 }
 apply plugin: 'java'
 apply plugin: 'jacoco'
+apply plugin: 'application'
+mainClassName = 'edu.jsu.mcis.Main'
 
 version = '1.0'
 jar {
@@ -38,7 +40,7 @@ repositories {
 }
 
 dependencies {
-    compile 'net.sf.opencsv:opencsv:2.3'
+    compile 'com.opencsv:opencsv:3.8'
     testCompile 'junit:junit:4.+'
 }
 
