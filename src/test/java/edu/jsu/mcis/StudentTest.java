@@ -17,34 +17,35 @@ public class StudentTest {
     
 	@Test
 	public void testSetGetID() {
-		student.setID("123232");
-		assertEquals("123232", student.getID());
+		student.setID("111111");
+		assertEquals("111111", student.getID());
 	}
     
     @Test
 	public void testSetGetFirstName() {
-		student.setFirstName("George");
-		assertEquals("George", student.getFirstName());
+		student.setFirstName("Jerrod");
+		assertEquals("Jerrod", student.getFirstName());
 	}
     
     @Test
 	public void testSetGetLastName() {
-		student.setLastName("Brady");
-		assertEquals("Brady", student.getLastName());
+		student.setLastName("Shields");
+		assertEquals("Shields", student.getLastName());
 	}
     
     @Test
 	public void testSetGetEmail() {
-		student.setEmail("gbrady");
-		assertEquals("gbrady", student.getEmail());
+		student.setEmail("jshields");
+		assertEquals("jshields", student.getEmail());
 	}
     
     @Test
 	public void testToString() {
-		student.setID("123232");
-        student.setFirstName("George");
-        student.setLastName("Brady");
-        student.setEmail("gbrady");
-		assertEquals("[123232] George Brady gbrady@jsu.edu", student.toString());
+		student.setID("111111");
+        student.setFirstName("Jerrod");
+        student.setLastName("Shields");
+        student.setEmail("jshields");
+        assertEquals("[111111] Jerrod Shields 
+        jshields@jsu.edu", student.toString());
 	}
 }
