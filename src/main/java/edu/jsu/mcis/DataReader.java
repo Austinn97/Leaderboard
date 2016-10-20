@@ -57,13 +57,29 @@ public class DataReader{
     public List<Student> getStudentList(){
         return studentList;
     }
+	
     public List<Course> getCourseList(){
         return courseList;
     }
+	
 	public Student getStudent(String id) {
-		return null;
+		Student student = new Student();
+		Student tempstudent = new Student();
+		for(int i = 0; i < studentList.size(); i++){
+			if(studentList.get(i).getID().equals(id)){
+				tempstudent = studentList.get(i);
+			}
+		}
+		return tempstudent;
 	}
 	public Course getCourse(String id) {
-		return null;
+		Course student = new Course();
+		Course tempcourse = new Course();
+		for(int i = 0; i < courseList.size(); i++){
+			if(courseList.get(i).getID().equals(id)){
+				tempcourse = courseList.get(i);
+			}
+		}
+		return tempcourse;
 	}
 }

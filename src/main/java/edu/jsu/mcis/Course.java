@@ -15,7 +15,10 @@ public class Course{
 	}
 	
 	public Course (){
-		
+		id = "";
+		term = "";
+		year = "";
+		classSize = "";
 	}
 
 	public String getID(){

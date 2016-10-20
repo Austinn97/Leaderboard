@@ -35,11 +35,12 @@ public class DataReaderTest{
 
 	@Test
 	public void testGetCourseList(){
-		List<Course> courseList = reader.getCourseList();
+		List<Course> courseList = new ArrayList<Course>();
+		courseList = reader.getCourseList();
 		Course first = new Course("99000", "Spring", "2013", "11");
-		assertEquals(first, courseList.get(0));
+		assertTrue(first.toString().equals(courseList.get(0).toString()));
 		Course last = new Course("99024", "Fall", "2014", "9");
-		assertEquals(last, courseList.get(courseList.size()-1));
+		assertTrue(last.toString().equals(courseList.get(courseList.size()-1).toString()));
 	}
 
 }
