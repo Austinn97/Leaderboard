@@ -6,13 +6,24 @@ public class Course{
 	private String term;
 	private String year; 
 	private String classSize; 
+	
+	public Course (String id, String term, String year, String classSize) {
+		this.id = id;
+		this.term = term;
+		this.year = year;
+		this.classSize = classSize;
+	}
+	
+	public Course (){
+		
+	}
 
 	public String getID(){
 		return id; 
 	}
 
 	public void setID(String id){
-		this.id = id.replace("\"", ""); 
+		this.id = id; 
 	}
 
 	public String getTerm(){
@@ -20,7 +31,7 @@ public class Course{
 	}
 
 	public void setTerm(String term){
-		this.term = term.replace("\"", ""); 
+		this.term = term; 
 	}
 
 	public String getYear(){
@@ -28,7 +39,7 @@ public class Course{
 	}
 
 	public void setYear(String year){
-		this.year = year.replace("\"", ""); 
+		this.year = year; 
 	}
 
 	public String getSize(){
@@ -36,7 +47,7 @@ public class Course{
 	}
 
 	public void setSize(String classSize){
-		this.classSize = classSize.replace("\"", ""); 
+		this.classSize = classSize; 
 	}
     
     @Override

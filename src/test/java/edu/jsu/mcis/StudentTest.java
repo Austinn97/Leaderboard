@@ -45,7 +45,7 @@ public class StudentTest {
         student.setFirstName("Jerrod");
         student.setLastName("Shields");
         student.setEmail("jshields");
-        assertEquals("[111111] Jerrod Shields 
-        jshields@jsu.edu", student.toString());
+        assertEquals("[111111] Jerrod Shields " +
+					 "jshields@jsu.edu", student.toString());
 	}
 }

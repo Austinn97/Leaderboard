@@ -8,18 +8,21 @@ public class DataReader{
     private List<Student> studentList = new ArrayList<Student>(); 
     private List<Course> courseList = new ArrayList<Course>();
 
-    public DataReader() throws IOException{        
-        readFile("Student");
-        readFile("Course");
+    public DataReader() {
+		try {
+			readFile("Student");
+			readFile("Course");
+		}
+		catch(IOException e) {}
     }
 
-    public void readFile(String fileType) throws IOException{       
+    private void readFile(String fileType) throws IOException{       
 
         if (fileType.equals("Student")) {
             String file;
             file = "src/main/resources/students.csv";
             
-            CSVReader reader = new CSVReader(new FileReader(file), ',' , '\'', 1);
+            CSVReader reader = new CSVReader(new FileReader(file), ',' , '\"', 1);
             Iterator<String[]> studentArray;
             CSVIterator iterator = new CSVIterator(reader);
             studentArray = iterator;    
@@ -36,7 +39,7 @@ public class DataReader{
         else if (fileType.equals("Course")) {
             String file;
             file = "src/main/resources/courses.csv";
-            CSVReader reader = new CSVReader(new FileReader(file), ',' , '\'', 1);  
+            CSVReader reader = new CSVReader(new FileReader(file), ',' , '\"', 1);  
             Iterator<String[]> courseArray;
             CSVIterator iterator = new CSVIterator(reader);
             courseArray = iterator; 
@@ -57,4 +60,10 @@ public class DataReader{
     public List<Course> getCourseList(){
         return courseList;
     }
+	public Student getStudent(String id) {
+		return null;
+	}
+	public Course getCourse(String id) {
+		return null;
+	}
 }

@@ -22,7 +22,7 @@ public class Student{
 	}
 
 	public void setID(String id){
-		this.id = id.replace("\"", "");
+		this.id = id;
 	}
 
 	public String getFirstName(){
@@ -30,7 +30,7 @@ public class Student{
 	}
 
 	public void setFirstName(String firstName){
-		this.firstName = firstName.replace("\"", ""); 
+		this.firstName = firstName; 
 	}
 
 	public String getLastName(){
@@ -38,7 +38,7 @@ public class Student{
 	}
 
 	public void setLastName(String lastName){
-		this.lastName = lastName.replace("\"", ""); 
+		this.lastName = lastName; 
 	}
 
 	public String getEmail(){
@@ -46,11 +46,35 @@ public class Student{
 	}
 
 	public void setEmail(String email){
-		this.email = email.replace("\"", ""); 
+		this.email = email; 
 	}
     
     @Override
     public String toString() {
         return "[" + id + "]" + " " + firstName + " " + lastName + " " + email + "@jsu.edu";
     }
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Student){
+			Student s = (Student) o;
+			if(s.id.equals(id)){
+				return true; 
+			}
+			else if(s.id.equals(firstName)){
+				return true; 
+			}
+			else if(s.id.equals(lastName)){
+				return true; 
+			}
+			else if(s.id.equals(email)){
+				return true; 
+			}
+			return false;
+		}
+		else {
+			return false;
+		}
+	
+	}
 }
