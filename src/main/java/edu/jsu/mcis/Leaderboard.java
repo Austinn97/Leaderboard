@@ -5,13 +5,36 @@ import java.io.*;
 
 public class Leaderboard {
 	
-    public static void main(String[] args) {
+	public Leaderboard(String type, String id){
+		
+	}
+	
+	public String getOutput(String type, String id){
 		DataReader reader = new DataReader();
 		Student student = new Student();
-        if (args[0].equals ("Student")) {
-			student = reader.getStudent(args[1]);
-			System.out.println(student);
+		String output = "";
+        if (type.equals ("Student")) {
+			student = reader.getStudent(id);
+			output = student.toString();
 		}
+		
+		Course course = new Course();
+        if (type.equals ("Course")) {
+			course = reader.getCourse(id);
+			output = course.toString(); 
+		}
+		return output;
+	}
+	
+    public static void main(String[] args) {
+		Leaderboard lb = new Leaderboard(args[0], args[1]);
+		System.out.println(lb.getOutput(args[0], args[1]));
+		
+		
+		
+		
+		
+		
 		
 	}
 	
