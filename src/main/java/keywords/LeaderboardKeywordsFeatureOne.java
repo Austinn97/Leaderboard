@@ -1,10 +1,15 @@
 package keywords;
 
 import edu.jsu.mcis.*;
+import java.io.*;
+import java.util.*;
 
 public class LeaderboardKeywordsFeatureOne {
 	private String output;
-	
+	private Leaderboard leaderBoard;
+	public void startLeaderboardCliWithArguments()throws IOException{
+		output = "";
+	}
 	
 	public void startLeaderboardCliWithArguments(String type, String id)throws IOException{
 		leaderBoard = new Leaderboard(type,id);
