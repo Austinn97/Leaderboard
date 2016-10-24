@@ -1,12 +1,15 @@
+package keywords;
+
 import edu.jsu.mcis.*;
 
 public class LeaderboardKeywordsFeatureOne {
+	private String output;
 	
 	
-	
-	public void startLeaderBoardCLIWithArguments(String type, String id)throws IOException{
+	public void startLeaderboardCliWithArguments(String type, String id)throws IOException{
 		leaderBoard = new Leaderboard(type,id);
 		DataReader datareader = new DataReader();
+		
 		if(type.equals("student")){
 			output = datareader.getStudent(id).toString();
 			
@@ -17,7 +20,7 @@ public class LeaderboardKeywordsFeatureOne {
 		}
 	}
 	public String getCommandLineOutput(){
-		return output
+		return output;
 	}
 
 	
