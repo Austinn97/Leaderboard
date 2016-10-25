@@ -82,4 +82,22 @@ public class DataReader{
 		}
 		return tempcourse;
 	}
+	public String[] getStudentId(List<Student> studentList){
+		String[] studentId = new String[studentList.size()];
+		for(int i = 0; i < studentList.size(); i++){
+			studentId[i] = studentList.get(i).getID();
+			
+			
+		}
+		return studentId;
+		}
+	public String[] getCourseId(List<Course> courseList){
+		String[] courseId = new String[courseList.size()];
+		for(int i = 0; i < courseList.size(); i++){
+			courseId[i] = courseList.get(i).getID();
+			
+			
+		}
+		return courseId;
+		}
 }

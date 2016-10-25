@@ -42,6 +42,25 @@ public class DataReaderTest{
 		Course last = new Course("99024", "Fall", "2014", "9");
 		assertTrue(last.toString().equals(courseList.get(courseList.size()-1).toString()));
 	}
+	@Test
+	public void takeStudentIds(){
+		List<Student> studentList = new ArrayList<Student>();
+		studentList = reader.getStudentList();
+		String[] studentId = new String[studentList.size()];
+		studentId = reader.getStudentId(studentList);
+		assertEquals("111111",studentId[0]);
+		assertEquals("111410",studentId[studentList.size()-1]);
+	}
+	
+	@Test
+	public void takeCourseIds(){
+		List<Course> courseList = new ArrayList<Course>();
+		courseList = reader.getCourseList();
+		String[] courseId = new String[courseList.size()];
+		courseId = reader.getCourseId(courseList);
+		assertEquals("99000",courseId[0]);
+		assertEquals("99024",courseId[courseList.size()-1]);
+	}
 
 }
 

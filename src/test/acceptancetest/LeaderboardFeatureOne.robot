@@ -1,7 +1,7 @@
 ## Acceptance Tests
 
 | *Setting* | *Value*                   |
-| Library   | keywords.LeaderboardKeywordsFeatureOne |
+| Library   | keywords.LeaderboardKeywords |
     
 | *Variable*         | *Value*                                 |
 | ${f01stu_expected} | [111128] Maritza Abbott mabbott@jsu.edu |
