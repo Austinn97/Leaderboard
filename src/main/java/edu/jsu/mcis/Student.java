@@ -54,8 +54,8 @@ public class Student{
         return "[" + id + "]" + " " + firstName + " " + lastName + " " + email + "@jsu.edu";
     }
 	
-	@Override
-	public boolean equals(Object o) {
+	//@Override
+	/*public boolean equals(Object o) {
 		if (o instanceof Student){
 			Student s = (Student) o;
 			if(s.id.equals(id)){
@@ -76,5 +76,5 @@ public class Student{
 			return false;
 		}
 	
-	}
+	}*/
 }

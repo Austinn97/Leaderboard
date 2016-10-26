@@ -12,12 +12,7 @@ public class Leaderboard {
 	public Leaderboard(String type){
 		
 	}
-	/*public String[] getIds(String type){
-		DataReader reader = new DataReader();
-		String[] studentId = new String[reader.get]
-		studentId = reader.getStudentId;
-		String
-	}*/
+	
 	public String getOutput(String type, String id){
 		DataReader reader = new DataReader();
 		Student student = new Student();
