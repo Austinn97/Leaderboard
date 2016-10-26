@@ -7,11 +7,13 @@ import java.util.*;
 public class LeaderboardKeywords {
 	private String output;
 	private Leaderboard leaderBoard;
+	
 		
 	public void startLeaderboardCliWithArguments()throws IOException{
 		output = "";
 	}
 	public void startLeaderboardCliWithArguments(String type)throws IOException{
+		StringBuilder builder = new StringBuilder();
 		leaderBoard = new Leaderboard(type);
 		DataReader reader = new DataReader();
 		List<Student> studentList = new ArrayList<Student>(); 
@@ -21,13 +23,34 @@ public class LeaderboardKeywords {
 		courseList = reader.getCourseList();
 		String[] idArray = new String[studentList.size()];
 		
+		String[] studentOutput;
+		String[] courseOutput;
 		
 		
 		if(type.equals("studentids")){
-			output = reader.getStudentId(studentList).toString();
+			studentOutput = new String[studentList.size()];
+			studentOutput = reader.getStudentId(studentList);
+			for(String output : studentOutput){
+				if(builder.length()> 0){
+					builder.append("\n");
+					
+				}
+				builder.append(output);
+			}
+			output = builder.toString();
+			output = builder.toString();
+			
 		}
 		if(type.equals("courseids")){
-			output = reader.getCourseId(courseList).toString();
+			courseOutput = new String[courseList.size()];
+			courseOutput = reader.getCourseId(courseList);
+			for(String output : courseOutput){
+				if(builder.length() > 0){
+					builder.append("\n");
+				}
+				builder.append(output);
+			}
+			output = builder.toString();
 		}
 	}
 	
