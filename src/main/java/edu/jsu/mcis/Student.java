@@ -53,28 +53,4 @@ public class Student{
     public String toString() {
         return "[" + id + "]" + " " + firstName + " " + lastName + " " + email + "@jsu.edu";
     }
-	
-	//@Override
-	/*public boolean equals(Object o) {
-		if (o instanceof Student){
-			Student s = (Student) o;
-			if(s.id.equals(id)){
-				return true; 
-			}
-			else if(s.id.equals(firstName)){
-				return true; 
-			}
-			else if(s.id.equals(lastName)){
-				return true; 
-			}
-			else if(s.id.equals(email)){
-				return true; 
-			}
-			return false;
-		}
-		else {
-			return false;
-		}
-	
-	}*/
 }
