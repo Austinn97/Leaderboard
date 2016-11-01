@@ -11,14 +11,14 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'application'
-mainClassName = 'edu.jsu.mcis.Main'
+mainClassName = 'edu.jsu.mcis.Leaderboard'
 
 version = '1.0'
 jar {
     manifest {
         attributes 'Implementation-Title': 'Leaderboard', 
                    'Implementation-Version': version, 
-                   'Main-Class': 'edu.jsu.mcis.Main'
+                   'Main-Class': 'edu.jsu.mcis.Leaderboard'
     }
 }
 
