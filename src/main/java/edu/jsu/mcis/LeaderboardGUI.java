@@ -1,28 +1,22 @@
 package edu.jsu.mcis;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
 
 
-public class LeaderboardGUI extends JFrame implements ActionListener{
+public class LeaderboardGUI extends JFrame{
 
-	private LeaderboardGUI(){
-		setLayout(new GridLayout(3,3));
-	}
-
-	@Override
-	private void actionPerformed(ActionEvent()){}
-
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-        LeaderboardGUI win = new LeaderboardGUI();
-        win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        win.pack();
-        frame.add(win);
-        win.setSize(400, 400);
-        win.setVisible(true);
-
+	public LeaderboardGUI(){}
+    
+    public void leaderboardGUI() {
+        JFrame frame = new JFrame("Gamegogy");
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(700, 700));
+        GUIPanels panel = new GUIPanels();
+        frame.setLayout(new BorderLayout());
+        frame.add(panel);
+        frame.pack();
     }
 }

@@ -28,12 +28,13 @@ public class Leaderboard {
 	
     public static void main(String[] args) {
 		DataReader reader = new DataReader();
-
+        LeaderboardGUI gui = new LeaderboardGUI();
+        gui.leaderboardGUI();
 		if(args[0].equalsIgnoreCase("student") || args[0].equalsIgnoreCase("course")){
 			Leaderboard lb = new Leaderboard(args[0], args[1]);
 			System.out.println(lb.getOutput(args[0], args[1]));
 		}
-		if(args[0].equalsIgnoreCase("studentids")){
+		else if(args[0].equalsIgnoreCase("studentids")){
 			List<Student> studentList = new ArrayList<Student>();
 			studentList = reader.getStudentList();
 			Leaderboard lb = new Leaderboard(args[0]);
@@ -43,7 +44,7 @@ public class Leaderboard {
 				System.out.println(studentId[i]);
 			}
 		}
-		if(args[0].equalsIgnoreCase("courseids")){
+		else if(args[0].equalsIgnoreCase("courseids")){
 			List<Course> courseList = new ArrayList<Course>();
 			courseList = reader.getCourseList();
 			Leaderboard lb = new Leaderboard(args[0]);
