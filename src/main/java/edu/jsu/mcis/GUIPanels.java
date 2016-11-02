@@ -9,18 +9,25 @@ public class GUIPanels extends JPanel {
     
 
     public GUIPanels()  {
+        JLabel term = new JLabel("Term");
         BorderLayout borderLayout = new BorderLayout();
-        String[] courses = { "Mayonnaise", "Ketchup", "Matt's Beard"};
-        String[] columns = { "Zeb's Beard", "Austin's Love", "Jacob's Code"};
+        Box box = Box.createVerticalBox();
+        setLayout(borderLayout);
+        String[] courses = { "111111", "111112", "111113", "111112",
+        "111112", "111112", "111112", "111112"};
+        String[] columns = { "Assignment 1", "Assignment 2", "Assignment 3",
+        "Assignment 2", "Assignment 2", "Assignment 2", "Assignment 2",
+        "Assignment 2"};
         JComboBox<String> courseCb = new JComboBox<String>(courses);
         JComboBox<String> columnCb = new JComboBox<String>(columns);
+        courseCb.setMaximumRowCount(6);
+        columnCb.setMaximumRowCount(6);
         JPanel leftPanel = new JPanel();
         JPanel rightPanel = new JPanel();
-        borderLayout.setHgap(100);
-        borderLayout.setVgap(100);
-        add(leftPanel, BorderLayout.WEST);
-        add(rightPanel, BorderLayout.CENTER);
-        
+        box.add(leftPanel);
+        box.add(term);
+        add(box, borderLayout.WEST);
+        add(rightPanel, borderLayout.EAST);
         JLabel courseLbl = new JLabel("Course");
         leftPanel.add(courseLbl);
         leftPanel.add(courseCb);
