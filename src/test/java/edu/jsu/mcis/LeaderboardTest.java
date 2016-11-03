@@ -13,10 +13,11 @@ public class LeaderboardTest {
 		
     }
 	@Test
-	public void testGetOutput(){
+	public void testGetStudentAndCourse(){
 		Leaderboard lb = new Leaderboard("Student","111111");
 		Leaderboard tb = new Leaderboard("Course","99000");
 		assertEquals("[111111] Jerrod Shields jshields@jsu.edu",lb.getOutput("Student","111111"));
 		assertEquals("[99000] Spring 2013 (11 students)",tb.getOutput("Course","99000"));
 	}
+	
 }

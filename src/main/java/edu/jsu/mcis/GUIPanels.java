@@ -2,6 +2,9 @@ package edu.jsu.mcis;
 
 import java.awt.*;
 import javax.swing.*;
+import java.util.*;
+import java.util.List;
+
 
 
 
@@ -9,7 +12,8 @@ public class GUIPanels extends JPanel {
     
 
     public GUIPanels()  {
-        JLabel term = new JLabel("Term");
+        DataReader reader = new DataReader();
+		JLabel term = new JLabel("Term");
         BorderLayout borderLayout = new BorderLayout();
         Box box = Box.createVerticalBox();
         setLayout(borderLayout);
@@ -18,7 +22,12 @@ public class GUIPanels extends JPanel {
         String[] columns = { "Assignment 1", "Assignment 2", "Assignment 3",
         "Assignment 2", "Assignment 2", "Assignment 2", "Assignment 2",
         "Assignment 2"};
-        JComboBox<String> courseCb = new JComboBox<String>(courses);
+        List<Course> courseList = new ArrayList<Course>();
+		courseList = reader.getCourseList();
+		Leaderboard lb = new Leaderboard("courseids");
+		String[] courseId = new String[courseList.size()];
+		courseId = reader.getCourseId(courseList);
+		JComboBox<String> courseCb = new JComboBox<String>(courseId);
         JComboBox<String> columnCb = new JComboBox<String>(columns);
         courseCb.setMaximumRowCount(6);
         columnCb.setMaximumRowCount(6);
