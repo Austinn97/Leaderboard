@@ -63,7 +63,6 @@ public class DataReader{
     }
 	
 	public Student getStudent(String id) {
-		Student student = new Student();
 		Student tempstudent = new Student();
 		for(int i = 0; i < studentList.size(); i++){
 			if(studentList.get(i).getID().equals(id)){
@@ -73,7 +72,6 @@ public class DataReader{
 		return tempstudent;
 	}
 	public Course getCourse(String id) {
-		Course student = new Course();
 		Course tempcourse = new Course();
 		for(int i = 0; i < courseList.size(); i++){
 			if(courseList.get(i).getID().equals(id)){

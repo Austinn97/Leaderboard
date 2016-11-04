@@ -1,12 +1,14 @@
 package edu.jsu.mcis;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.util.*;
 import java.util.List;
 
 
-public class GUIPanels extends JPanel {
+public class GUIPanels extends JPanel{
     
 
     public GUIPanels()  {
@@ -70,5 +72,19 @@ public class GUIPanels extends JPanel {
 		southPanel.add(name);
 		southPanel.add(email);
 		southPanel.add(score);
+    }
+    
+    private String getCourseTerm(String id){
+        DataReader reader = new DataReader();
+        Course course = new Course();
+        String term;
+        ActionListener courseClick = new ActionListener() {
+            public void actionPerformed(ActionEvent a) {
+                String id = (String) courseCb.getSelectedItem();
+                course = reader.getCourse(id);
+                term = course.getTerm;
+            }
+        };
+        return term;
     }
 }
