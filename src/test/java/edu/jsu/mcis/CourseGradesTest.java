@@ -1,3 +1,5 @@
+package edu.jsu.mcis;
+
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -6,16 +8,18 @@ import java.util.*;
 
 public class CourseGradesTest{
 	
-	private CourseGrades courseGrades;
+	private CourseGrades cG;
 	
 	@Before
 	public void setUp(){
-		courseGrades = new CourseGrades();
+		cG = new CourseGrades("/src/test/resources/courses/99000.csv");		
     }
 	
-	/*@Test
-	public void testTheFirstLine(){
-		courseGrades c = courseGrades.setId("111318");
-		assertEquals("111318",c.getId());
-	}*/
+	@Test
+	public void testGetAssignmentList(){
+		List<String> artifacts = cG.getHeader();
+		assertEquals("Total", artifacts.get(0));
+		assertEquals("Exam1", artifacts.get(artifacts.size()-1));
+	}
+
 }
