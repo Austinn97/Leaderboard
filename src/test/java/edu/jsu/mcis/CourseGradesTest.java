@@ -16,10 +16,12 @@ public class CourseGradesTest{
     }
 	
 	@Test
-	public void testGetAssignmentList(){
-		List<String> artifacts = cG.getHeader();
+	public void testGetArtifactList(){
+		List<String> artifacts = cG.getArtifact();
 		assertEquals("Total", artifacts.get(0));
 		assertEquals("Exam1", artifacts.get(artifacts.size()-1));
 	}
+	
+	
 
 }

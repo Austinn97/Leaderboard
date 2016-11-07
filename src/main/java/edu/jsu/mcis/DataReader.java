@@ -12,7 +12,9 @@ public class DataReader{
 		try {
 			readFile("Student");
 			readFile("Course");
-		}
+			readFile("Grades");
+			
+			}
 		catch(IOException e) {e.printStackTrace();}
     }
 
@@ -53,6 +55,15 @@ public class DataReader{
                 courseList.add(course);
             }
         }
+		/*else if(fileType.equals("Grades")){
+			String file;
+			String inputForFile;
+			System.out.println("What course are you wanting to look at?");
+			inputForFile = System.console().readLine();
+			file = "src/main/resources/" + inputForFile + ".csv";
+			CSVReader reader = new CSVReader(new FileReader(file), ',' , '\"');
+			
+		}*/
     }
     public List<Student> getStudentList(){
         return studentList;

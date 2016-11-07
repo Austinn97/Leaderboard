@@ -74,7 +74,7 @@ public class GUIPanels extends JPanel{
 		southPanel.add(score);
     }
     
-    private String getCourseTerm(String id){
+    /*private String getCourseTerm(String id){
         DataReader reader = new DataReader();
         Course course = new Course();
         String term;
@@ -86,5 +86,5 @@ public class GUIPanels extends JPanel{
             }
         };
         return term;
-    }
+    }*/
 }
