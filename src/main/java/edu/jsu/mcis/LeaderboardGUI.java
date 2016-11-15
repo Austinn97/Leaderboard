@@ -13,10 +13,10 @@ public class LeaderboardGUI extends JFrame{
         JFrame frame = new JFrame("Gamegogy");
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(new Dimension(350, 400));
+        frame.setSize(new Dimension(350, 350));
         GUIPanels panel = new GUIPanels();
         frame.setLayout(new BorderLayout());
         frame.add(panel);
-        frame.pack();
+		frame.setResizable(false);
     }
 }

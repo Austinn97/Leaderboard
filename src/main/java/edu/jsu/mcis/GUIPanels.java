@@ -8,17 +8,22 @@ import java.util.*;
 import java.util.List;
 
 
-public class GUIPanels extends JPanel{
-    
+public class GUIPanels extends JPanel implements ActionListener{
+    DataReader reader = new DataReader();
+	Course course = new Course();
+	List<Course> courseList = new ArrayList<Course>();
+	Leaderboard lb = new Leaderboard("courseids");
+	BorderLayout borderLayout = new BorderLayout();
+	
 
     public GUIPanels()  {
-        BorderLayout borderLayout = new BorderLayout();
-        setLayout(borderLayout);
         
-		DataReader reader = new DataReader();
-		List<Course> courseList = new ArrayList<Course>();
+        setLayout(borderLayout);
+		setupBorders();
+		}
+	
+	public void setupBorders(){
 		courseList = reader.getCourseList();
-		Leaderboard lb = new Leaderboard("courseids");
 		String[] courseId = new String[courseList.size()];
 		courseId = reader.getCourseId(courseList);
         
@@ -28,6 +33,8 @@ public class GUIPanels extends JPanel{
         
 		JComboBox<String> courseCb = new JComboBox<String>(courseId);
         JComboBox<String> columnCb = new JComboBox<String>(columns);
+		
+		courseCb.addActionListener(this);
         
 		courseCb.setMaximumRowCount(6);
         columnCb.setMaximumRowCount(6);
@@ -36,14 +43,14 @@ public class GUIPanels extends JPanel{
 		JPanel leftPanel = new JPanel();
         JPanel rightPanel = new JPanel();
 		JPanel southPanel = new JPanel();
+		
         
 		add(northPanel, borderLayout.NORTH);
         add(rightPanel, borderLayout.EAST);
 		add(leftPanel, borderLayout.WEST);
 		add(southPanel, borderLayout.SOUTH);
 		
-        
-		JLabel courseLbl = new JLabel("Course");
+        JLabel courseLbl = new JLabel("Course");
 		JLabel columnLbl = new JLabel("Column");
 		JLabel empty = new JLabel("    ");
         northPanel.add(courseLbl);
@@ -55,9 +62,9 @@ public class GUIPanels extends JPanel{
 		courseCb.setVisible(true);
         columnCb.setVisible(true);
 		
-		JLabel term = new JLabel("            Term: ");
+		JLabel termColon = new JLabel("Term: ");
 		leftPanel.setLayout(new BorderLayout());
-		leftPanel.add(term);
+		leftPanel.add(termColon);
 		
 		
 		JLabel enroll = new JLabel("Enrollment:                                ");
@@ -72,19 +79,28 @@ public class GUIPanels extends JPanel{
 		southPanel.add(name);
 		southPanel.add(email);
 		southPanel.add(score);
-    }
+		
+		
+	}
+
+		
+
+	public void actionPerformed(ActionEvent a) {
+		DataReader reader = new DataReader();
+		List<Course> courseList = new ArrayList<Course>();
+		courseList = reader.getCourseList();
+		Leaderboard lb = new Leaderboard("courseids");
+		String[] courseId = new String[courseList.size()];
+		courseId = reader.getCourseId(courseList);
+		JComboBox<String> courseCb = new JComboBox<String>(courseId);
+        
+		String term;
+		Course course = new Course();		
+		String id = (String) courseCb.getSelectedItem();
+        course = reader.getCourse(id);
+        term = course.getTerm();
+		
+        }
+		
     
-    /*private String getCourseTerm(String id){
-        DataReader reader = new DataReader();
-        Course course = new Course();
-        String term;
-        ActionListener courseClick = new ActionListener() {
-            public void actionPerformed(ActionEvent a) {
-                String id = (String) courseCb.getSelectedItem();
-                course = reader.getCourse(id);
-                term = course.getTerm;
-            }
-        };
-        return term;
-    }*/
 }
