@@ -22,6 +22,23 @@ public class CourseGradesTest{
 		assertEquals("Exam1", artifacts.get(artifacts.size()-1));
 	}
 	
+	@Test
+	public void testGetGrade() {
+		float g = cG.getGrade("111111", "Total");
+		assertEquals(42.0, g, 0.000001);
+	}
+	
+	@Test
+	public void testGetColumn() {
+		List<Float> expected = ...
+		List<Float> col = cG.getColumn("Assignment 1");
+	}
+	
+	@Test
+	public void testGetRow() {
+		List<Float> row = cG.getRow("111111");
+	}
+	
 	
 
 }
