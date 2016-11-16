@@ -5,59 +5,37 @@ import com.opencsv.*;
 import java.io.*;
 
 public class CourseGrades{
-	private List<String> artifcatsList;
-	private String total;
-	private String id;
-	private String grades;
+	private List<String> headers;
+	private List<Float> grades;
+	private List<String> ids;
 	
 	public CourseGrades(String fileName){
 		
 	}
-	public CourseGrades(List<String> artifcatsList, String id, String grades, String total){
-		this.artifcatsList = artifcatsList;
-		this.id = id;
+	public CourseGrades(List<String> headers, List<String> ids, List<Float> grades){
+		this.headers = headers;
+		this.ids = ids;
 		this.grades = grades;
-		this.total = total;
 	}
 	
-	public CourseGrades(){
-		artifcatsList = new ArrayList<String>();
-		id = "";
-		grades = "";
-		total= "";
+	public List<String> getHeaders(){
+		return headers;
+	}
+	
+	public List<String> getIds(){
+		return ids;
 		
 	}
-	public List<String> getArtifact(){
-		return artifcatsList;
-	}
-	public void setArtifcat(List<String> artifcatsList){
-		this.artifcatsList = artifcatsList;
-	}
 	
-	public String getID(){
-		return id;
-	}
-	
-	public void setID(String id){
-		this.id = id;
-	}
-	
-	public String getGrades(){
+	public List<Float> getGrades(String id, String assignment){
 		return grades;
 	}
 	
-	public void setGrades(String grades){
-		this.grades = grades;
-	}
-	
-	public String getTotal(){
-		return total;
-	}
-	
-	public void setTotal(String total){
-		this.total = total;
-	}
 	
 	
+	/*@Override
+    public String toString() {
+        return "[" + ids + "] " + total + " " + artifactsList + " (" + grade + " students)";
+    }*/
 	
 }
