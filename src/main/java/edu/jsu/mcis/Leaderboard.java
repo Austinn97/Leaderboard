@@ -53,6 +53,7 @@ public class Leaderboard {
 			for(int i = 0; i < courseList.size(); i++){
 				System.out.println(courseId[i]);
 			}
-		}		
+		}
+		
 	}	
 }

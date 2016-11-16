@@ -7,6 +7,11 @@ public class Course{
 	private String year; 
 	private String classSize; 
 	
+	
+	public Course(String id){
+		this.id = id;
+	}
+	
 	public Course (String id, String term, String year, String classSize) {
 		this.id = id;
 		this.term = term;

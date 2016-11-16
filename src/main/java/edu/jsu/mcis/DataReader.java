@@ -7,6 +7,11 @@ import java.io.*;
 public class DataReader{
     private List<Student> studentList = new ArrayList<Student>(); 
     private List<Course> courseList = new ArrayList<Course>();
+	private List<String> headers = new ArrayList<String>();
+	private List<String> ids = new ArrayList<String>();
+	private List<Float> grades = new ArrayList<Float>();
+	
+	
 
     public DataReader() {
 		try {
@@ -55,16 +60,21 @@ public class DataReader{
                 courseList.add(course);
             }
         }
-		/*else if(fileType.equals("Grades")){
+		else if(fileType.equals("Grades")){
 			String file;
-			String inputForFile;
-			System.out.println("What course are you wanting to look at?");
-			inputForFile = System.console().readLine();
-			file = "src/main/resources/" + inputForFile + ".csv";
+			file = "src/main/resources/99000.csv";
 			CSVReader reader = new CSVReader(new FileReader(file), ',' , '\"');
-			
-		}*/
-    }
+			String[] nextLine = reader.readNext();
+			for(int i=0; i<nextLine.length; i++){
+				headers.add(nextLine[i]);
+			}
+			while ((nextLine = reader.readNext()) != null){
+				ids.add(nextLine[0]);
+				System.out.println(nextLine);
+				
+			}
+		}
+	}
     public List<Student> getStudentList(){
         return studentList;
     }

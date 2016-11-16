@@ -61,6 +61,7 @@ public class DataReaderTest{
 		assertEquals("99000",courseId[0]);
 		assertEquals("99024",courseId[courseList.size()-1]);
 	}
+
 	/*@Test
 	public void readFirstFile(){
 		List<CourseGrades> courseGrades = new ArrayList<CourseGrades>;
