@@ -6,13 +6,13 @@ import java.io.*;
 
 public class CourseGrades{
 	private List<String> headers;
-	private List<Float> grades;
+	private List<List<Float>> grades;
 	private List<String> ids;
 	
 	public CourseGrades(String fileName){
 		
 	}
-	public CourseGrades(List<String> headers, List<String> ids, List<Float> grades){
+	public CourseGrades(List<String> headers, List<String> ids, List<List<Float>> grades){
 		this.headers = headers;
 		this.ids = ids;
 		this.grades = grades;
@@ -27,7 +27,7 @@ public class CourseGrades{
 		
 	}
 	
-	public List<Float> getGrades(String id, String assignment){
+	public float getGrades(String id, String assignment){
 		return grades;
 	}
 	

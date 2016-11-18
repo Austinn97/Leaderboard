@@ -12,19 +12,19 @@ public class CourseGradesTest{
 	
 	@Before
 	public void setUp(){
-		cG = new CourseGrades("/src/test/resources/courses/99000.csv");		
+		cG = new CourseGrades((List<String> headers, List<String> ids, List<List<Float>> grades);
     }
 	
 	@Test
 	public void testGetGrade() {
-		//List<Float> g = cG.getGrades("111318", "Assignment 1");
-		//assertEquals(65.0, g, 0.000001);
+		float g = cG.getGrades("111318", "Assignment 1");
+		assertEquals(65.0, g, 0.000001);
 	}
-	/*@Test
+	@Test
 	public void testGetTotal(){
 		float g = cG.getTotal("111318");
 		assertEquals(925.0,g,0.000001);
-	} */
+	} 
 	
 	/*@Test
 	public void testGetColumn() {
