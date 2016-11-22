@@ -9,7 +9,7 @@ public class DataReader{
     private List<Course> courseList = new ArrayList<Course>();
 	private List<String> headers = new ArrayList<String>();
 	private List<String> ids = new ArrayList<String>();
-	private List<Float> grades = new ArrayList<Float>();
+	private List<Float> totals = new ArrayList<Float>();
 	
 	
 
@@ -70,12 +70,20 @@ public class DataReader{
 			}
 			while ((nextLine = reader.readNext()) != null){
 				ids.add(nextLine[0]);
-				
+				totals.add(Float.parseFloat(nextLine[1]));
+				}
 			}
-		}
-		System.out.println(headers);
-		System.out.println(ids);
 	}
+	public float getMax(){
+		return Collections.max(totals);
+	}
+	public List<Float> getTotals(){
+		return totals;
+	}
+	public List<String> getIds(){
+		return ids;
+	}
+
     public List<Student> getStudentList(){
         return studentList;
     }
@@ -120,4 +128,6 @@ public class DataReader{
 		}
 		return courseId;
 		}
+		
+
 }
