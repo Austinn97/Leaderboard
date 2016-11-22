@@ -8,21 +8,21 @@ import java.util.*;
 import java.util.List;
 
 
-public class GUIPanels extends JPanel{
-    DataReader reader = new DataReader();
-	Course course = new Course();
-	List<Course> courseList = new ArrayList<Course>();
-	Leaderboard lb = new Leaderboard("courseids");
-	BorderLayout borderLayout = new BorderLayout();
-	
 
-    public GUIPanels()  {
-        
-        setLayout(borderLayout);
+public class GUIPanels extends JPanel{
+
+   
+   public GUIPanels()  {
 		setupBorders();
 		}
 	
 	public void setupBorders(){
+		BorderLayout borderLayout = new BorderLayout();
+		setLayout(borderLayout);
+		
+		DataReader reader = new DataReader();
+		List<Course> courseList = new ArrayList<Course>();
+		Leaderboard lb = new Leaderboard("courseids");
 		courseList = reader.getCourseList();
 		String[] courseId = new String[courseList.size()];
 		courseId = reader.getCourseId(courseList);
@@ -68,10 +68,12 @@ public class GUIPanels extends JPanel{
 		rightPanel.setLayout(new BorderLayout());
 		rightPanel.add(enroll);
 		
+		
 		JLabel id = new JLabel("ID: ");
 		JLabel name = new JLabel("Name: ");
         JLabel email = new JLabel("Email: ");
 		JLabel score = new JLabel("Score: ");
+		southPanel.setLayout(new GridLayout(4, 1));
 		southPanel.add(id);
 		southPanel.add(name);
 		southPanel.add(email);
@@ -79,11 +81,31 @@ public class GUIPanels extends JPanel{
 		
 		courseCb.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				//Gets correct term and enrollment
+				Course course = new Course();
 				DataReader reader = new DataReader();		
-				String id = (String) courseCb.getSelectedItem();
-				course = reader.getCourse(id);
+				String selectedCourseId = (String) courseCb.getSelectedItem();
+				course = reader.getCourse(selectedCourseId);
 				term.setText("Term: " + course.getTerm() + " " + course.getYear());
 				enroll.setText("Enrollment: " + course.getSize());
+				
+				//declare variables for top student use
+				Student student = new Student();
+				List<String> studentIds;
+				String maxStuId;
+				int maxGradeIndex;
+				
+				//*quick fix* gets top student from course 99000
+				float max = reader.getMax();
+				List<Float> total = reader.getTotals();
+				maxGradeIndex = total.indexOf(max);
+				studentIds = reader.getIds();
+				maxStuId = studentIds.get(maxGradeIndex);
+				student = reader.getStudent(maxStuId);
+				id.setText("ID: " + maxStuId);
+				name.setText("Name: " + student.getFirstName() + " " + student.getLastName());
+				email.setText("Email: " + student.getEmail() + "@jsu.edu");
+				score.setText("Score: " + max);
 				
 			}
 		});	
