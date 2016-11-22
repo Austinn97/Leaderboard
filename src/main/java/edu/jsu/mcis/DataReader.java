@@ -62,7 +62,7 @@ public class DataReader{
         }
 		else if(fileType.equals("Grades")){
 			String file;
-			file = "src/main/resources/99000.csv";
+			file = "src/main/resources/courses/99000.csv";
 			CSVReader reader = new CSVReader(new FileReader(file), ',' , '\"');
 			String[] nextLine = reader.readNext();
 			for(int i=0; i<nextLine.length; i++){
@@ -70,10 +70,11 @@ public class DataReader{
 			}
 			while ((nextLine = reader.readNext()) != null){
 				ids.add(nextLine[0]);
-				System.out.println(nextLine);
 				
 			}
 		}
+		System.out.println(headers);
+		System.out.println(ids);
 	}
     public List<Student> getStudentList(){
         return studentList;
