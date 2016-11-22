@@ -59,9 +59,9 @@ public class GUIPanels extends JPanel{
 		courseCb.setVisible(true);
         columnCb.setVisible(true);
 		
-		JLabel termColon = new JLabel("Term: ");
+		JLabel term = new JLabel("Term: ");
 		leftPanel.setLayout(new BorderLayout());
-		leftPanel.add(termColon);
+		leftPanel.add(term);
 		
 		
 		JLabel enroll = new JLabel("Enrollment: ");
@@ -82,7 +82,7 @@ public class GUIPanels extends JPanel{
 				DataReader reader = new DataReader();		
 				String id = (String) courseCb.getSelectedItem();
 				course = reader.getCourse(id);
-				termColon.setText("Term: " + course.getTerm() + " " + course.getYear());
+				term.setText("Term: " + course.getTerm() + " " + course.getYear());
 				enroll.setText("Enrollment: " + course.getSize());
 				
 			}
