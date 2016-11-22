@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.List;
 
 
-public class GUIPanels extends JPanel implements ActionListener{
+public class GUIPanels extends JPanel{
     DataReader reader = new DataReader();
 	Course course = new Course();
 	List<Course> courseList = new ArrayList<Course>();
@@ -32,10 +32,8 @@ public class GUIPanels extends JPanel implements ActionListener{
         "Assignment 2"};
         
 		JComboBox<String> courseCb = new JComboBox<String>(courseId);
-        JComboBox<String> columnCb = new JComboBox<String>(columns);
+		JComboBox<String> columnCb = new JComboBox<String>(columns);
 		
-		courseCb.addActionListener(this);
-        
 		courseCb.setMaximumRowCount(6);
         columnCb.setMaximumRowCount(6);
         
@@ -44,7 +42,6 @@ public class GUIPanels extends JPanel implements ActionListener{
         JPanel rightPanel = new JPanel();
 		JPanel southPanel = new JPanel();
 		
-        
 		add(northPanel, borderLayout.NORTH);
         add(rightPanel, borderLayout.EAST);
 		add(leftPanel, borderLayout.WEST);
@@ -67,7 +64,7 @@ public class GUIPanels extends JPanel implements ActionListener{
 		leftPanel.add(termColon);
 		
 		
-		JLabel enroll = new JLabel("Enrollment:                                ");
+		JLabel enroll = new JLabel("Enrollment: ");
 		rightPanel.setLayout(new BorderLayout());
 		rightPanel.add(enroll);
 		
@@ -80,27 +77,17 @@ public class GUIPanels extends JPanel implements ActionListener{
 		southPanel.add(email);
 		southPanel.add(score);
 		
-		
-	}
-
-		
-
-	public void actionPerformed(ActionEvent a) {
-		DataReader reader = new DataReader();
-		List<Course> courseList = new ArrayList<Course>();
-		courseList = reader.getCourseList();
-		Leaderboard lb = new Leaderboard("courseids");
-		String[] courseId = new String[courseList.size()];
-		courseId = reader.getCourseId(courseList);
-		JComboBox<String> courseCb = new JComboBox<String>(courseId);
-        
-		String term;
-		Course course = new Course();		
-		String id = (String) courseCb.getSelectedItem();
-        course = reader.getCourse(id);
-        term = course.getTerm();
-		
-        }
-		
-    
+		courseCb.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				DataReader reader = new DataReader();		
+				String id = (String) courseCb.getSelectedItem();
+				course = reader.getCourse(id);
+				termColon.setText("Term: " + course.getTerm() + " " + course.getYear());
+				enroll.setText("Enrollment: " + course.getSize());
+				
+			}
+		});	
+		courseCb.setSelectedItem(courseId[0]);
+		columnCb.setSelectedItem(columns[0]);
+	}    
 }
