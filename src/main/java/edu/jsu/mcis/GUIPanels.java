@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.util.*;
 import java.util.List;
+import java.io.*;
+import com.opencsv.*;
 
 
 
@@ -27,12 +29,8 @@ public class GUIPanels extends JPanel{
 		String[] courseId = new String[courseList.size()];
 		courseId = reader.getCourseId(courseList);
         
-		String[] columns = { "Assignment 1", "Assignment 2", "Assignment 3",
-        "Assignment 2", "Assignment 2", "Assignment 2", "Assignment 2",
-        "Assignment 2"};
-        
 		JComboBox<String> courseCb = new JComboBox<String>(courseId);
-		JComboBox<String> columnCb = new JComboBox<String>(columns);
+		JComboBox<String> columnCb = new JComboBox<String>();
 		
 		courseCb.setMaximumRowCount(6);
         columnCb.setMaximumRowCount(6);
@@ -107,9 +105,28 @@ public class GUIPanels extends JPanel{
 				email.setText("Email: " + student.getEmail() + "@jsu.edu");
 				score.setText("Score: " + max);
 				
+				List<String> headers = new ArrayList<String>();
+				List<String> ids = new ArrayList<String>();
+				List<Float> totals = new ArrayList<Float>();
+				List<Float> grades = new ArrayList<Float>(); 
+				
+				try{
+				String file;
+				file = "src/main/resources/courses/" + selectedCourseId + ".csv";
+				CSVReader readerTwo = new CSVReader(new FileReader(file), ',' , '\"');
+				String[] nextLine = readerTwo.readNext();
+				for(int i=2; i<nextLine.length; i++){
+					headers.add(nextLine[i]);
+				}
+				while ((nextLine = readerTwo.readNext()) != null){
+					ids.add(nextLine[0]);
+					totals.add(Float.parseFloat(nextLine[1]));
+				}
+				columnCb.setModel(new DefaultComboBoxModel<>(headers.toArray(new String[0])));
+				}
+				catch(IOException except){}
 			}
 		});	
 		courseCb.setSelectedItem(courseId[0]);
-		columnCb.setSelectedItem(columns[0]);
 	}    
 }
