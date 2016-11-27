@@ -22,6 +22,8 @@ public class DataReader{
 			}
 		catch(IOException e) {e.printStackTrace();}
     }
+	
+	
 
     private void readFile(String fileType) throws IOException{       
 
@@ -60,30 +62,7 @@ public class DataReader{
                 courseList.add(course);
             }
         }
-		else if(fileType.equals("Grades")){
-			String file;
-			file = "src/main/resources/courses/99000.csv";
-			CSVReader reader = new CSVReader(new FileReader(file), ',' , '\"');
-			String[] nextLine = reader.readNext();
-			for(int i=0; i<nextLine.length; i++){
-				headers.add(nextLine[i]);
-			}
-			while ((nextLine = reader.readNext()) != null){
-				ids.add(nextLine[0]);
-				totals.add(Float.parseFloat(nextLine[1]));
-				}
-			}
 	}
-	public float getMax(){
-		return Collections.max(totals);
-	}
-	public List<Float> getTotals(){
-		return totals;
-	}
-	public List<String> getIds(){
-		return ids;
-	}
-
     public List<Student> getStudentList(){
         return studentList;
     }
