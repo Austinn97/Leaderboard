@@ -12,7 +12,8 @@ import com.opencsv.*;
 
 
 public class GUIPanels extends JPanel{
-
+   
+   public String[] headersArray;
    
    public GUIPanels()  {
 		setupBorders();
@@ -87,46 +88,66 @@ public class GUIPanels extends JPanel{
 				term.setText("Term: " + course.getTerm() + " " + course.getYear());
 				enroll.setText("Enrollment: " + course.getSize());
 				
-				//declare variables for top student use
-				Student student = new Student();
-				List<String> studentIds;
-				String maxStuId;
-				int maxGradeIndex;
-				
-				//*quick fix* gets top student from course 99000
-				float max = reader.getMax();
-				List<Float> total = reader.getTotals();
-				maxGradeIndex = total.indexOf(max);
-				studentIds = reader.getIds();
-				maxStuId = studentIds.get(maxGradeIndex);
-				student = reader.getStudent(maxStuId);
-				id.setText("ID: " + maxStuId);
-				name.setText("Name: " + student.getFirstName() + " " + student.getLastName());
-				email.setText("Email: " + student.getEmail() + "@jsu.edu");
-				score.setText("Score: " + max);
-				
+				//sets correct headers in column combo box
 				List<String> headers = new ArrayList<String>();
+				try{
+				String file;
+				file = "src/main/resources/courses/" + selectedCourseId + ".csv";
+				CSVReader readerTwo = new CSVReader(new FileReader(file), ',' , '\"');
+				String[] nextLine = readerTwo.readNext();
+				for(int i=1; i<nextLine.length; i++){
+					headers.add(nextLine[i]);
+				}
+				headersArray = headers.toArray(new String[0]);
+				columnCb.setModel(new DefaultComboBoxModel<>(headersArray));
+				}
+				catch(IOException except){}
+			}
+		});	
+		courseCb.setSelectedItem(courseId[0]);
+		
+		columnCb.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent a){ 
+				List<String> fullHeaders = new ArrayList<String>();
+				List<Float> grades = new ArrayList<Float>();
 				List<String> ids = new ArrayList<String>();
-				List<Float> totals = new ArrayList<Float>();
-				List<Float> grades = new ArrayList<Float>(); 
+				
+				int assignmentIndex = 0;
+				int maxGradeIndex = 0;
+				Student student = new Student();
+				String maxStuId;
+				String selectedCourseId = (String) courseCb.getSelectedItem();
+				String selectedAssignment = (String) columnCb.getSelectedItem();
 				
 				try{
 				String file;
 				file = "src/main/resources/courses/" + selectedCourseId + ".csv";
 				CSVReader readerTwo = new CSVReader(new FileReader(file), ',' , '\"');
 				String[] nextLine = readerTwo.readNext();
-				for(int i=2; i<nextLine.length; i++){
-					headers.add(nextLine[i]);
+				for(int i=0; i<nextLine.length; i++){
+					fullHeaders.add(nextLine[i]);
 				}
+				
+				assignmentIndex = fullHeaders.indexOf(selectedAssignment);
+				
 				while ((nextLine = readerTwo.readNext()) != null){
 					ids.add(nextLine[0]);
-					totals.add(Float.parseFloat(nextLine[1]));
+					grades.add(Float.parseFloat(nextLine[assignmentIndex]));
 				}
-				columnCb.setModel(new DefaultComboBoxModel<>(headers.toArray(new String[0])));
 				}
 				catch(IOException except){}
+				
+				//gets top student for selected assignment
+				float maxGradeInAssignment = Collections.max(grades);
+				maxGradeIndex = grades.indexOf(maxGradeInAssignment);
+				maxStuId = ids.get(maxGradeIndex);
+				student = reader.getStudent(maxStuId);
+				id.setText("ID: " + maxStuId);
+				name.setText("Name: " + student.getFirstName() + " " + student.getLastName());
+				email.setText("Email: " + student.getEmail() + "@jsu.edu");
+				score.setText("Score: " + maxGradeInAssignment);
 			}
-		});	
-		courseCb.setSelectedItem(courseId[0]);
+		});
+		columnCb.setSelectedItem(headersArray[0]);
 	}    
 }
