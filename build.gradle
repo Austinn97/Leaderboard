@@ -52,9 +52,8 @@ jacocoTestReport {
 		classDirectories = files(classDirectories.files.collect {
 			fileTree(dir: it, exclude: [
 				'**/*keywords**',
-				'**/*GUIPanels**',
 				'**/*LeaderboardGUI**',
-				'**/*CourseGrades**'
+				'**/*GUIPanels**',
 			])
 		})
 	}
