@@ -87,60 +87,27 @@ public class GUIPanels extends JPanel{
 				course = reader.getCourse(selectedCourseId);
 				term.setText("Term: " + course.getTerm() + " " + course.getYear());
 				enroll.setText("Enrollment: " + course.getSize());
-				
-				//sets correct headers in column combo box
-				List<String> headers = new ArrayList<String>();
-				try{
-				String file;
-				file = "src/main/resources/courses/" + selectedCourseId + ".csv";
-				CSVReader readerTwo = new CSVReader(new FileReader(file), ',' , '\"');
-				String[] nextLine = readerTwo.readNext();
-				for(int i=1; i<nextLine.length; i++){
-					headers.add(nextLine[i]);
-				}
-				headersArray = headers.toArray(new String[0]);
+
+				CourseGrades courseCg = new CourseGrades(selectedCourseId);
+				String[] headersArray = courseCg.getHeaders();
 				columnCb.setModel(new DefaultComboBoxModel<>(headersArray));
-				}
-				catch(IOException except){}
+				columnCb.setSelectedItem(headersArray[0]);
 			}
 		});	
 		courseCb.setSelectedItem(courseId[0]);
 		
 		columnCb.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent a){ 
-				List<String> fullHeaders = new ArrayList<String>();
-				List<Float> grades = new ArrayList<Float>();
-				List<String> ids = new ArrayList<String>();
-				
-				int assignmentIndex = 0;
-				int maxGradeIndex = 0;
-				Student student = new Student();
-				String maxStuId;
+			public void actionPerformed(ActionEvent a){ 			
 				String selectedCourseId = (String) courseCb.getSelectedItem();
 				String selectedAssignment = (String) columnCb.getSelectedItem();
 				
-				try{
-				String file;
-				file = "src/main/resources/courses/" + selectedCourseId + ".csv";
-				CSVReader readerTwo = new CSVReader(new FileReader(file), ',' , '\"');
-				String[] nextLine = readerTwo.readNext();
-				for(int i=0; i<nextLine.length; i++){
-					fullHeaders.add(nextLine[i]);
-				}
-				
-				assignmentIndex = fullHeaders.indexOf(selectedAssignment);
-				
-				while ((nextLine = readerTwo.readNext()) != null){
-					ids.add(nextLine[0]);
-					grades.add(Float.parseFloat(nextLine[assignmentIndex]));
-				}
-				}
-				catch(IOException except){}
-				
+				CourseGrades columnCg = new CourseGrades(selectedCourseId, selectedAssignment);
+		
 				//gets top student for selected assignment
-				float maxGradeInAssignment = Collections.max(grades);
-				maxGradeIndex = grades.indexOf(maxGradeInAssignment);
-				maxStuId = ids.get(maxGradeIndex);
+				Student student = new Student();
+				float maxGradeInAssignment = Collections.max(columnCg.getGrades());
+				int maxGradeIndex = columnCg.getGrades().indexOf(maxGradeInAssignment);
+				String maxStuId = columnCg.getIds().get(maxGradeIndex);
 				student = reader.getStudent(maxStuId);
 				id.setText("ID: " + maxStuId);
 				name.setText("Name: " + student.getFirstName() + " " + student.getLastName());
@@ -148,6 +115,5 @@ public class GUIPanels extends JPanel{
 				score.setText("Score: " + maxGradeInAssignment);
 			}
 		});
-		columnCb.setSelectedItem(headersArray[0]);
 	}    
 }
