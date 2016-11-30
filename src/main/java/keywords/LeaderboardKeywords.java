@@ -8,10 +8,12 @@ public class LeaderboardKeywords {
 	private String output;
 	private Leaderboard leaderBoard;
 	
+	
 		
 	public void startLeaderboardCliWithArguments()throws IOException{
 		output = "";
 	}
+	
 	public void startLeaderboardCliWithArguments(String type)throws IOException{
 		StringBuilder builder = new StringBuilder();
 		leaderBoard = new Leaderboard(type);
@@ -69,6 +71,10 @@ public class LeaderboardKeywords {
 	}
 	public String getCommandLineOutput(){
 		return output;
+	}
+	
+	public void startApplication(Leaderboard leaderBoard){
+		
 	}
 
 	

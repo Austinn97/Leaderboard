@@ -3,6 +3,7 @@ buildscript {
         classpath files(mkdir('build/classes/main'))
         classpath files(mkdir('build/resources/main'))
         classpath 'com.opencsv:opencsv:3.8'
+		classpath 'org.robotframework:swinglibrary:1.9.6'
     }
 }
 plugins {
@@ -41,6 +42,7 @@ repositories {
 
 dependencies {
     compile 'com.opencsv:opencsv:3.8'
+	compile 'org.robotframework:swinglibrary:1.9.6'
     testCompile 'junit:junit:4.+'
 }
 
