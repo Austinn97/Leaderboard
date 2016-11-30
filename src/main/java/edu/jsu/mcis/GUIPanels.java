@@ -87,7 +87,6 @@ public class GUIPanels extends JPanel{
 				course = reader.getCourse(selectedCourseId);
 				term.setText("Term: " + course.getTerm() + " " + course.getYear());
 				enroll.setText("Enrollment: " + course.getSize());
-
 				CourseGrades courseCg = new CourseGrades(selectedCourseId);
 				String[] headersArray = courseCg.getHeaders();
 				columnCb.setModel(new DefaultComboBoxModel<>(headersArray));
@@ -103,7 +102,6 @@ public class GUIPanels extends JPanel{
 				
 				CourseGrades columnCg = new CourseGrades(selectedCourseId, selectedAssignment);
 		
-				//gets top student for selected assignment
 				Student student = new Student();
 				float maxGradeInAssignment = Collections.max(columnCg.getGrades());
 				int maxGradeIndex = columnCg.getGrades().indexOf(maxGradeInAssignment);

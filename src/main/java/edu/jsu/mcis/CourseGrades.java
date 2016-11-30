@@ -17,11 +17,11 @@ public class CourseGrades{
 			file = "src/main/resources/courses/" + selectedCourseId + ".csv";
 			CSVReader reader = new CSVReader(new FileReader(file), ',' , '\"');
 			String[] nextLine = reader.readNext();
-				for(int i=1; i<nextLine.length; i++){
-					headers.add(nextLine[i]);
-				}
-				}
-				catch(IOException except){}
+			for(int i=1; i<nextLine.length; i++){
+				headers.add(nextLine[i]);
+			}
+		}
+		catch(IOException except){}
 	}
 	
 	public CourseGrades(String selectedCourseId, String selectedAssignment){
@@ -29,22 +29,21 @@ public class CourseGrades{
 			List<String> fullHeaders = new ArrayList<String>();
 			int assignmentIndex;
 			String file;
-			
 			file = "src/main/resources/courses/" + selectedCourseId + ".csv";
 			CSVReader reader = new CSVReader(new FileReader(file), ',' , '\"');
 			String[] nextLine = reader.readNext();
-				for(int i=0; i<nextLine.length; i++){
-					fullHeaders.add(nextLine[i]);
-				}
+            
+			for(int i=0; i<nextLine.length; i++){
+				fullHeaders.add(nextLine[i]);
+			}
+			assignmentIndex = fullHeaders.indexOf(selectedAssignment);
 				
-				assignmentIndex = fullHeaders.indexOf(selectedAssignment);
-				
-				while ((nextLine = reader.readNext()) != null){
+			while ((nextLine = reader.readNext()) != null){
 					ids.add(nextLine[0]);
 					grades.add(Float.parseFloat(nextLine[assignmentIndex]));
-				}
-				}
-				catch(IOException except){}
+			}
+		}
+		catch(IOException except){}
 	}
 
 	
