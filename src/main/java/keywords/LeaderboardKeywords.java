@@ -73,9 +73,6 @@ public class LeaderboardKeywords {
 		return output;
 	}
 	
-	public void startApplication(Leaderboard leaderBoard){
-		
-	}
 
 	
 	

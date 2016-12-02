@@ -8,10 +8,16 @@ import java.util.*;
 import java.util.List;
 import java.io.*;
 import com.opencsv.*;
+@SuppressWarnings("unchecked")
 
 
-
-public class GUIPanels extends JPanel{
+public class GUIPanels  extends JPanel{
+	JLabel studentId,studentEmail,studentScore,studentName,courseTerm,courseEnrollment,columnLbl,empty,courseLbl;
+	JComboBox<String> courseComboBox,columnComboBox;
+	DataReader reader;
+	Course course;
+	
+	
    
    public String[] headersArray;
    
@@ -23,18 +29,27 @@ public class GUIPanels extends JPanel{
 		BorderLayout borderLayout = new BorderLayout();
 		setLayout(borderLayout);
 		
-		DataReader reader = new DataReader();
+		reader = new DataReader();
 		List<Course> courseList = new ArrayList<Course>();
-		Leaderboard lb = new Leaderboard("courseids");
+		Leaderboard lb = new Leaderboard("courseIds");
 		courseList = reader.getCourseList();
 		String[] courseId = new String[courseList.size()];
 		courseId = reader.getCourseId(courseList);
-        
-		JComboBox<String> courseCb = new JComboBox<String>(courseId);
-		JComboBox<String> columnCb = new JComboBox<String>();
 		
-		courseCb.setMaximumRowCount(6);
-        columnCb.setMaximumRowCount(6);
+        
+		courseComboBox = new JComboBox<String>(courseId);
+		courseComboBox.setName("courseComboBox");
+		courseComboBox.setSelectedItem(0);
+		columnComboBox = new JComboBox<String>();
+		columnComboBox.setName("columnComboBox");
+		
+		CourseGrades courseCg = new CourseGrades("99000");
+		String[] headersArray = courseCg.getHeaders();
+		columnComboBox.setModel(new DefaultComboBoxModel<>(headersArray));
+		columnComboBox.setSelectedItem(0);
+		
+		courseComboBox.setMaximumRowCount(6);
+        columnComboBox.setMaximumRowCount(6);
         
 		JPanel northPanel = new JPanel();
 		JPanel leftPanel = new JPanel();
@@ -46,72 +61,86 @@ public class GUIPanels extends JPanel{
 		add(leftPanel, borderLayout.WEST);
 		add(southPanel, borderLayout.SOUTH);
 		
-        JLabel courseLbl = new JLabel("Course");
-		JLabel columnLbl = new JLabel("Column");
-		JLabel empty = new JLabel("    ");
+        courseLbl = new JLabel("Course");
+		columnLbl = new JLabel("Column");
+		empty = new JLabel("    ");
         northPanel.add(courseLbl);
-        northPanel.add(courseCb);
+        northPanel.add(courseComboBox);
 		northPanel.add(empty);
         northPanel.add(columnLbl);
-        northPanel.add(columnCb);
+        northPanel.add(columnComboBox);
 		
-		courseCb.setVisible(true);
-        columnCb.setVisible(true);
+		courseComboBox.setVisible(true);
+        columnComboBox.setVisible(true);
 		
-		JLabel term = new JLabel("Term: ");
+		courseTerm = new JLabel("Term: ");
+		courseTerm.setName("courseTerm");
 		leftPanel.setLayout(new BorderLayout());
-		leftPanel.add(term);
+		leftPanel.add(courseTerm);
 		
 		
-		JLabel enroll = new JLabel("Enrollment: ");
+		courseEnrollment = new JLabel("Enrollment: ");
+		courseEnrollment.setName("courseEnrollment");
 		rightPanel.setLayout(new BorderLayout());
-		rightPanel.add(enroll);
+		rightPanel.add(courseEnrollment);
 		
 		
-		JLabel id = new JLabel("ID: ");
-		JLabel name = new JLabel("Name: ");
-        JLabel email = new JLabel("Email: ");
-		JLabel score = new JLabel("Score: ");
+		studentId = new JLabel("Id: ");
+		studentId.setName("studentId");
+		studentName = new JLabel("Name: ");
+		studentName.setName("studentName");
+        studentEmail = new JLabel("Email: ");
+		studentEmail.setName("studentEmail");
+		studentScore = new JLabel("Score: ");
+		studentScore.setName("studentScore");
 		southPanel.setLayout(new GridLayout(4, 1));
-		southPanel.add(id);
-		southPanel.add(name);
-		southPanel.add(email);
-		southPanel.add(score);
-		
-		courseCb.addActionListener(new ActionListener(){
+		southPanel.add(studentId);
+		southPanel.add(studentName);
+		southPanel.add(studentEmail);
+		southPanel.add(studentScore);
+		updateHigherLabels();
+		updateLowerLabels();
+		courseComboBox.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				//Gets correct term and enrollment
-				Course course = new Course();
-				DataReader reader = new DataReader();		
-				String selectedCourseId = (String) courseCb.getSelectedItem();
-				course = reader.getCourse(selectedCourseId);
-				term.setText("Term: " + course.getTerm() + " " + course.getYear());
-				enroll.setText("Enrollment: " + course.getSize());
-				CourseGrades courseCg = new CourseGrades(selectedCourseId);
-				String[] headersArray = courseCg.getHeaders();
-				columnCb.setModel(new DefaultComboBoxModel<>(headersArray));
-				columnCb.setSelectedItem(headersArray[0]);
+				updateHigherLabels();
 			}
 		});	
-		courseCb.setSelectedItem(courseId[0]);
 		
-		columnCb.addActionListener(new ActionListener(){
+		columnComboBox.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a){ 			
-				String selectedCourseId = (String) courseCb.getSelectedItem();
-				String selectedAssignment = (String) columnCb.getSelectedItem();
-				
-				CourseGrades columnCg = new CourseGrades(selectedCourseId, selectedAssignment);
-		
-				Student student = new Student();
-				float maxGradeInAssignment = Collections.max(columnCg.getGrades());
-				int maxGradeIndex = columnCg.getGrades().indexOf(maxGradeInAssignment);
-				String maxStuId = columnCg.getIds().get(maxGradeIndex);
-				student = reader.getStudent(maxStuId);
-				id.setText("ID: " + maxStuId);
-				name.setText("Name: " + student.getFirstName() + " " + student.getLastName());
-				email.setText("Email: " + student.getEmail() + "@jsu.edu");
-				score.setText("Score: " + maxGradeInAssignment);
+				updateLowerLabels();
 			}
 		});
-	}    
-}
+		
+		}  
+	private void updateHigherLabels(){
+				
+				reader = new DataReader();		
+				String selectedCourseId = (String) courseComboBox.getSelectedItem();
+				course = reader.getCourse(selectedCourseId);
+				courseTerm.setText("Term: " + course.getTerm() + " " + course.getYear());
+				courseEnrollment.setText("Enrollment: " + course.getSize());
+				CourseGrades courseCg = new CourseGrades(selectedCourseId);
+				String[] headersArray = courseCg.getHeaders();
+				columnComboBox.setModel(new DefaultComboBoxModel<>(headersArray));
+				columnComboBox.setSelectedItem(0);
+	}
+	private void updateLowerLabels(){
+		String selectedCoursestudentId = (String) courseComboBox.getSelectedItem();
+			String selectedAssignment = (String) columnComboBox.getSelectedItem();
+			
+			CourseGrades columnCg = new CourseGrades(selectedCoursestudentId, selectedAssignment);
+	
+			Student student = new Student();
+			float maxGradeInAssignment = Collections.max(columnCg.getGrades());
+			int maxGradeIndex = columnCg.getGrades().indexOf(maxGradeInAssignment);
+			String maxStuId = columnCg.getIds().get(maxGradeIndex);
+			student = reader.getStudent(maxStuId);
+			studentId.setText("Id: " + maxStuId);
+			studentName.setText("Name: " + student.getFirstName() + " " + student.getLastName());
+			studentEmail.setText("Email: " + student.getEmail() + "@jsu.edu");
+			studentScore.setText("Score: " + maxGradeInAssignment);
+		}
+		
+	}
+	

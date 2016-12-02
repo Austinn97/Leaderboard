@@ -5,12 +5,12 @@ import javax.swing.*;
 import java.util.*;
 
 
-public class LeaderboardGUI extends JFrame{
+public class LeaderboardGUI  extends JFrame{
 
 	public LeaderboardGUI(){}
     
     public void leaderboardGUI() {
-        JFrame frame = new JFrame("Gamegogy");
+        JFrame frame = new JFrame("Leaderboard");
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(new Dimension(350, 350));
