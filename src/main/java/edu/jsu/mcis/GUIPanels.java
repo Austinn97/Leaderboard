@@ -12,18 +12,19 @@ import com.opencsv.*;
 
 
 public class GUIPanels  extends JPanel{
-	JLabel studentId,studentEmail,studentScore,studentName,courseTerm,courseEnrollment,columnLbl,empty,courseLbl;
+	static JLabel studentId,studentEmail,studentScore,studentName,courseTerm,courseEnrollment,columnLbl,empty,courseLbl;
 	JComboBox<String> courseComboBox,columnComboBox;
 	DataReader reader;
 	Course course;
-	
-	
+	public static CourseGrades columnCg;
+	public static float maxGradeInAssignment;
+	private BarGraph barGraph;
    
    public String[] headersArray;
-   
-   public GUIPanels()  {
+
+   public GUIPanels(){
 		setupBorders();
-		}
+	}
 	
 	public void setupBorders(){
 		BorderLayout borderLayout = new BorderLayout();
@@ -102,45 +103,64 @@ public class GUIPanels  extends JPanel{
 		updateLowerLabels();
 		courseComboBox.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				updateHigherLabels();
+				barGraph.refreshPanel();
+				updateHigherLabels();				
 			}
 		});	
 		
 		columnComboBox.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent a){ 			
 				updateLowerLabels();
+				barGraph.refreshPanel();
 			}
 		});
 		
 		}  
-	private void updateHigherLabels(){
-				
-				reader = new DataReader();		
-				String selectedCourseId = (String) courseComboBox.getSelectedItem();
-				course = reader.getCourse(selectedCourseId);
-				courseTerm.setText("Term: " + course.getTerm() + " " + course.getYear());
-				courseEnrollment.setText("Enrollment: " + course.getSize());
-				CourseGrades courseCg = new CourseGrades(selectedCourseId);
-				String[] headersArray = courseCg.getHeaders();
-				columnComboBox.setModel(new DefaultComboBoxModel<>(headersArray));
-				columnComboBox.setSelectedItem(0);
-	}
+	
 	private void updateLowerLabels(){
 		String selectedCoursestudentId = (String) courseComboBox.getSelectedItem();
-			String selectedAssignment = (String) columnComboBox.getSelectedItem();
-			
-			CourseGrades columnCg = new CourseGrades(selectedCoursestudentId, selectedAssignment);
-	
-			Student student = new Student();
-			float maxGradeInAssignment = Collections.max(columnCg.getGrades());
-			int maxGradeIndex = columnCg.getGrades().indexOf(maxGradeInAssignment);
-			String maxStuId = columnCg.getIds().get(maxGradeIndex);
-			student = reader.getStudent(maxStuId);
-			studentId.setText("Id: " + maxStuId);
-			studentName.setText("Name: " + student.getFirstName() + " " + student.getLastName());
-			studentEmail.setText("Email: " + student.getEmail() + "@jsu.edu");
-			studentScore.setText("Score: " + maxGradeInAssignment);
-		}
+		String selectedAssignment = (String) columnComboBox.getSelectedItem();
 		
+		columnCg = new CourseGrades(selectedCoursestudentId, selectedAssignment);
+
+		Student student = new Student();
+		maxGradeInAssignment = Collections.max(columnCg.getGrades());
+		int maxGradeIndex = columnCg.getGrades().indexOf(maxGradeInAssignment);
+		String maxStuId = columnCg.getIds().get(maxGradeIndex);
+		student = reader.getStudent(maxStuId);
+		studentId.setText("Id: " + maxStuId);
+		studentName.setText("Name: " + student.getFirstName() + " " + student.getLastName());
+		studentEmail.setText("Email: " + student.getEmail() + "@jsu.edu");
+		studentScore.setText("Score: " + maxGradeInAssignment);
+		System.out.println(Collections.max(columnCg.getGrades()));
+		if(barGraph != null){
+			barGraph.refreshPanel();	
+		}
 	}
+
+	private void updateHigherLabels(){				
+		reader = new DataReader();		
+		String selectedCourseId = (String) courseComboBox.getSelectedItem();
+		course = reader.getCourse(selectedCourseId);
+		courseTerm.setText("Term: " + course.getTerm() + " " + course.getYear());
+		courseEnrollment.setText("Enrollment: " + course.getSize());
+		CourseGrades courseCg = new CourseGrades(selectedCourseId);
+		String[] headersArray = courseCg.getHeaders();
+		columnComboBox.setModel(new DefaultComboBoxModel<>(headersArray));
+		columnComboBox.setSelectedItem(0);
+		updateLowerLabels();
+	}
+
+	public void setLabel(String id, float score){
+		Student student = reader.getStudent(id);
+		studentId.setText("Id: " + student.getID());
+		studentName.setText("Name: " + student.getFirstName() + " " + student.getLastName());
+		studentEmail.setText("Email: " + student.getEmail() + "@jsu.edu");
+		studentScore.setText("Score: " + score);
+	}	
+
+	public void setBarGraph(BarGraph bg){
+		barGraph = bg;
+	}	
+}
 	

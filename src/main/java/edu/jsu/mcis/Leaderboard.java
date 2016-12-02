@@ -5,7 +5,7 @@ import java.io.*;
 
 public class Leaderboard {
 	
-	public Leaderboard(String type, String id){}	
+	public Leaderboard(String type, String id){} 
 	public Leaderboard(String type){}
 	
 	public String getOutput(String type, String id){
@@ -25,15 +25,16 @@ public class Leaderboard {
 		}
 		return output;
 	}
-	
+
+
     public static void main(String[] args) {
 		DataReader reader = new DataReader();
-        LeaderboardGUI gui = new LeaderboardGUI();
-        gui.leaderboardGUI();
+		LeaderboardGUI gui = new LeaderboardGUI();
+		gui.leaderboardGUI();
 		if(args.length > 0){
 			if(args[0].equalsIgnoreCase("student") || args[0].equalsIgnoreCase("course")){
 				Leaderboard lb = new Leaderboard(args[0], args[1]);
-				System.out.println(lb.getOutput(args[0], args[1]));
+				System.out.println(lb.getOutput(args[0], args[1])); 	
 			}
 			else if(args[0].equalsIgnoreCase("studentids")){
 				List<Student> studentList = new ArrayList<Student>();
@@ -59,7 +60,6 @@ public class Leaderboard {
 		
 		else{
 			System.out.println("No argument entered.");
-		}
-		
+		}	
 	}	
 }
